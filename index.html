@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کافه هانی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'vazir': ['Vazirmatn', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#A0522D',
+                        accent: '#CD853F',
+                        light: '#DEB887'
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.8) 0%, rgba(160, 82, 45, 0.6) 100%);
+        }
+        
+        .menu-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .menu-card:hover::before {
+            left: 100%;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.12);
+            border-color: rgba(139, 69, 19, 0.2);
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 2px;
+        }
+        
+        .dark .menu-card {
+            background: rgba(31, 41, 55, 0.98);
+            border-color: rgba(75, 85, 99, 0.2);
+            color: #f8fafc;
+        }
+        
+        .dark .menu-card:hover {
+            border-color: rgba(139, 69, 19, 0.4);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .divider-line {
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.3), transparent);
+            height: 1px;
+            margin: 4rem auto;
+            width: 80%;
+        }
+        
+        .number-fa {
+            font-feature-settings: 'ss01' on;
+        }
+        
+        .glass-bg {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-vazir">
+
+    <!-- Header -->
+    <header class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2061&q=80');"></div>
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="animate-fade-up">
+                <h1 class="text-6xl lg:text-7xl font-black mb-6 tracking-widest">کافه هانی</h1>
+                <div class="w-24 h-0.5 bg-white mx-auto mb-6 opacity-80"></div>
+                <p class="text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
+                    تجربه‌ای فراموش‌نشدنی از طعم و آرامش
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-16">
+        
+        <!-- کافه -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">کافه</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">مجموعه‌ای از بهترین قهوه‌های دنیا</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 py-3">اسپرسو کلاسیک</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه خالص و پررنگ با عصاره کامل</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 py-3">کاپوچینو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">اسپرسو با شیر بخار و فوم مخملی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">لاته وانیل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه با شیر و طعم وانیل طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">موکا</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">ترکیب قهوه و شکلات بلژیکی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آمریکانو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">اسپرسو رقیق شده با آب گرم</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">فلت وایت</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">دوبل اسپرسو با شیر مخملی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۷,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">مکیاتو کارامل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">اسپرسو با شیر و کارامل طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">قهوه ترک</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه سنتی و غلیظ ترکی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">فرنچ پرس</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه دم کرده فرانسوی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">وی شصت</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه دستی با فیلتر تخصصی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۵,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- آیس کافه -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">آیس کافه</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">قهوه‌های سرد و خنک‌کننده</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آیس لاته</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">لاته سرد با یخ و شیر مخملی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۶,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">فراپه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه یخ زده خامه‌ای کلاسیک</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">کولد برو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قهوه سرد آهسته دم</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آیس موکا</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">موکا سرد شکلاتی لذیذ</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آیس کاپوچینو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">کاپوچینو سرد با فوم نرم</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۷,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- نوشیدنی -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">نوشیدنی</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">نوشیدنی‌های طبیعی و تازه</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">لیموناد تازه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">لیمو طبیعی با نعنا و یخ</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">اسموتی توت فرنگی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">میکس توت فرنگی و ماست</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آب پرتقال طبیعی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">تازه و پر از ویتامین</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">شیک انبه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">انبه تروپیکال با شیر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">نارگیل لیمو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">آب نارگیل با لیم تازه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">شربت انگور</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">شربت خانگی سرد و معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۷,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- ماکتیل -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">ماکتیل</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">ترکیبات خاص و منحصربه‌فرد</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">شرلی تمپل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">زنجبیل با گرنادین و آلبالو</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">ویرجین موهیتو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">لیم و نعنا با آب گازدار</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">پینا کولادا</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">آناناس و نارگیل خامه‌ای</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آرنولد پالمر</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">چای یخ با لیموناد تازه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۶,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">فروت پانچ</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">میکس میوه تروپیکال با یخ</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- چای و دمنوش -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">چای و دمنوش</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">گیاهان معطر و آرام‌بخش</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای سیاه سیلان</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">درجه یک سری‌لانکا</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای سبز ژاپنی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">اصل ژاپن طعم ملایم</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش بابونه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">آرام‌بخش طبیعی و معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای برگاموت</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">معطر و خوشمزه انگلیسی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۴,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش نعنا</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">تازه و خنک‌کننده طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۹,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای مصالح</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">هندی با ادویه معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۶,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش زعفران</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">لوکس با زعفران اصل</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای یاسمن</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">معطر با گل یاسمن</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش گل گاوزبان</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">سنتی آرام‌بخش ایرانی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۱,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای اولونگ</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">نیمه تخمیر چینی اصل</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش گل سرخ</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">گل محمدی عطرآگین</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای روئیبوس</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">قرمز آفریقایی بی‌کافئین</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۷,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">دمنوش کوهی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">گیاهان کوهی معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۳,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">چای لیمو عسل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">سیاه با لیمو و عسل طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۴,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- قلیان -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">قلیان</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">طعم‌های منحصربه‌فرد و معطر</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">سیب دوآتیشه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">سیب قرمز با نعنا خنک</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">انگور</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">انگور شیرین و معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آلبالو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">آلبالو ترش و دلپذیر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">هلو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">هلوی رسیده و شیرین</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">بلوبری</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">توت آبی با عسل طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">طالبی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">طالبی رسیده و خنک</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">میکس بری</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">انواع توت جنگلی ترکیبی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">آناناس</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">تروپیکال شیرین و معطر</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۴,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">رز</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">گل محمدی اصل ایرانی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۶,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">وانیل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">کرمی و ملایم فرانسوی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۷,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- بستنی -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">بستنی</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">بستنی‌های خانگی و طبیعی</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">وانیل کلاسیک</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">وانیل خانگی اصیل و کرمی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">شکلات تلخ</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">شکلات بلژیکی غنی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۶,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">توت فرنگی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">توت فرنگی طبیعی تازه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۴,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">انبه</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">انبه تروپیکال شیرین</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">پسته</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">پسته اصل ایرانی لوکس</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="divider-line"></div>
+
+        <!-- صبحانه -->
+        <section class="mb-20 reveal">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">صبحانه</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">آغاز روزی پر انرژی</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">املت کلاسیک</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">سه تخمه با پنیر و سبزیجات</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">پنکیک عسل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">نرم با عسل و کره تازه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">کروآسان پنیر</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">تازه با پنیر خامه‌ای</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">تست آووکادو</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">نان تست با آووکادو تازه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۸,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">پلیت پنیر محلی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">انواع پنیر با نان و عسل</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۵,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">گرانولا توت</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">با ماست یونانی و میوه</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۰,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">ساندویچ کالباس</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">با سبزیجات تازه و سس</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۴,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">وافل عسل</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">بلژیکی با عسل طبیعی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۱,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">تخم مرغ بندیکت</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">آبپز با سس هولندی</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۲,۰۰۰ تومان</div>
+                </div>
+                
+                <div class="menu-card rounded-xl p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">صبحانه انگلیسی</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">کامل با لوبیا و نان تست</p>
+                    </div>
+                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۸,۰۰۰ تومان</div>
+                </div>
+                
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-bg py-12 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-3">کافه هانی</h3>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">آدرس</h4>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        کرمان، خیابان آیت‌الله صالحی یک و هشت
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">تماس</h4>
+                    <div class="text-gray-600 dark:text-gray-400 space-y-1 number-fa">
+                        <p>۰۳۷۳۲۵۱۵۵۹۳</p>
+                        <p>۰۳۴۳۲۵۳۱۲۳۰</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">ساعات کاری</h4>
+                    <p class="text-gray-600 dark:text-gray-400 number-fa">
+                        ۸:۰۰ تا ۲۴:۰۰
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+                <p class="text-gray-500 dark:text-gray-500 font-light text-sm">
+                    طعمی فراموش‌نشدنی در فضایی آرام و دنج
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode support
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Convert numbers to Persian
+        function convertToPersianNumbers(str) {
+            const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return str.replace(/[0-9]/g, function(w) {
+                return persianNumbers[+w];
+            });
+        }
+
+        // Apply Persian numbers to all number-fa elements
+        document.querySelectorAll('.number-fa').forEach(el => {
+            el.innerHTML = convertToPersianNumbers(el.innerHTML);
+        });
+    </script>
+</body>
+</html>
