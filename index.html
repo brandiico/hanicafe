@@ -58,17 +58,40 @@
             }
         }
         
+        /* Light mode colors */
+        body {
+            background: linear-gradient(135deg, #fef7f0 0%, #fdf2f8 50%, #fdf2f8 100%);
+            color: #1f2937;
+            transition: all 0.5s ease;
+        }
+        
+        /* Dark mode colors */
+        .dark body {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);
+            color: #f9fafb;
+        }
+        
         .hero-overlay {
             background: linear-gradient(135deg, rgba(139, 69, 19, 0.8) 0%, rgba(160, 82, 45, 0.6) 100%);
         }
         
         .menu-card {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(139, 69, 19, 0.1);
+            border: 1px solid rgba(139, 69, 19, 0.15);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 180px;
+        }
+        
+        .dark .menu-card {
+            background: rgba(31, 41, 55, 0.95);
+            border-color: rgba(75, 85, 99, 0.3);
+            color: #f8fafc;
         }
         
         .menu-card::before {
@@ -89,7 +112,19 @@
         .menu-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(139, 69, 19, 0.12);
-            border-color: rgba(139, 69, 19, 0.2);
+            border-color: rgba(139, 69, 19, 0.25);
+        }
+        
+        .dark .menu-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(139, 69, 19, 0.4);
+        }
+        
+        .menu-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .price-tag {
@@ -97,6 +132,7 @@
             color: white;
             position: relative;
             overflow: hidden;
+            margin-top: auto;
         }
         
         .section-title {
@@ -114,17 +150,6 @@
             height: 3px;
             background: linear-gradient(135deg, #8B4513, #A0522D);
             border-radius: 2px;
-        }
-        
-        .dark .menu-card {
-            background: rgba(31, 41, 55, 0.95);
-            border-color: rgba(75, 85, 99, 0.3);
-            color: #f8fafc;
-        }
-        
-        .dark .menu-card:hover {
-            border-color: rgba(139, 69, 19, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .reveal {
@@ -166,9 +191,32 @@
         }
         
         /* Navigation Styles */
+        nav {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+        }
+        
+        .dark nav {
+            background: rgba(17, 24, 39, 0.95) !important;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+        }
+        
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            color: #374151;
+        }
+        
+        .dark .nav-link {
+            color: #d1d5db;
+        }
+        
+        .nav-link:hover {
+            color: #8B4513;
+        }
+        
+        .dark .nav-link:hover {
+            color: #CD853F;
         }
         
         .nav-link::after {
@@ -193,32 +241,78 @@
             position: relative;
             transform: scale(1);
             transition: all 0.3s ease;
+            color: #374151;
+        }
+        
+        .dark .theme-toggle-btn {
+            color: #d1d5db;
         }
         
         .theme-toggle-btn:hover {
             transform: scale(1.1);
+            color: #8B4513;
+        }
+        
+        .dark .theme-toggle-btn:hover {
+            color: #CD853F;
         }
         
         .theme-toggle-btn:active {
             transform: scale(0.95);
         }
 
-        /* Body background transitions */
-        body {
-            transition: background 0.5s ease;
+        /* Mobile menu */
+        #mobile-menu {
+            background: rgba(255, 255, 255, 0.98) !important;
+            border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+        }
+        
+        .dark #mobile-menu {
+            background: rgba(17, 24, 39, 0.98) !important;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+        }
+        
+        .mobile-nav-link {
+            color: #374151;
+        }
+        
+        .dark .mobile-nav-link {
+            color: #d1d5db;
+        }
+        
+        .mobile-nav-link:hover {
+            color: #8B4513;
+            background-color: rgba(243, 244, 246, 0.5);
+        }
+        
+        .dark .mobile-nav-link:hover {
+            color: #CD853F;
+            background-color: rgba(31, 41, 55, 0.5);
         }
 
-        /* Additional dark mode enhancements */
-        .dark {
-            color-scheme: dark;
+        /* Additional text colors */
+        .text-title {
+            color: #1f2937;
+        }
+        
+        .dark .text-title {
+            color: #f9fafb;
+        }
+        
+        .text-subtitle {
+            color: #6b7280;
+        }
+        
+        .dark .text-subtitle {
+            color: #9ca3af;
         }
 
     </style>
 </head>
-<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-vazir transition-all duration-500">
+<body class="font-vazir">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30 transition-all duration-300">
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-300">
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
@@ -229,17 +323,17 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="flex items-center space-x-reverse space-x-8">
-                        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">صفحه نخست</a>
-                        <a href="#coffee" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">کافه</a>
-                        <a href="#ice-coffee" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">آیس کافه</a>
-                        <a href="#drinks" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">نوشیدنی</a>
-                        <a href="#mocktails" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">ماکتیل</a>
-                        <a href="#tea" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">چای و دمنوش</a>
-                        <a href="#hookah" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">قلیان</a>
-                        <a href="#breakfast" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">صبحانه</a>
+                        <a href="#home" class="nav-link font-medium">صفحه نخست</a>
+                        <a href="#coffee" class="nav-link font-medium">کافه</a>
+                        <a href="#ice-coffee" class="nav-link font-medium">آیس کافه</a>
+                        <a href="#drinks" class="nav-link font-medium">نوشیدنی</a>
+                        <a href="#mocktails" class="nav-link font-medium">ماکتیل</a>
+                        <a href="#tea" class="nav-link font-medium">چای و دمنوش</a>
+                        <a href="#hookah" class="nav-link font-medium">قلیان</a>
+                        <a href="#breakfast" class="nav-link font-medium">صبحانه</a>
                         
                         <!-- Dark Mode Toggle -->
-                        <button id="theme-toggle" class="theme-toggle-btn p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">
+                        <button id="theme-toggle" class="theme-toggle-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">
                             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                             </svg>
@@ -253,7 +347,7 @@
                 <!-- Mobile Menu Button & Theme Toggle -->
                 <div class="md:hidden flex items-center space-x-2">
                     <!-- Mobile Dark Mode Toggle -->
-                    <button id="mobile-theme-toggle" class="theme-toggle-btn p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">
+                    <button id="mobile-theme-toggle" class="theme-toggle-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">
                         <svg id="mobile-theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
@@ -262,7 +356,7 @@
                         </svg>
                     </button>
                     
-                    <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors">
+                    <button id="mobile-menu-button" class="theme-toggle-btn">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -272,16 +366,16 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white/98 dark:bg-gray-900/98 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30 transition-all duration-300">
+        <div id="mobile-menu" class="md:hidden hidden backdrop-blur-md transition-all duration-300">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">صفحه نخست</a>
-                <a href="#coffee" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">کافه</a>
-                <a href="#ice-coffee" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">آیس کافه</a>
-                <a href="#drinks" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">نوشیدنی</a>
-                <a href="#mocktails" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">ماکتیل</a>
-                <a href="#tea" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">چای و دمنوش</a>
-                <a href="#hookah" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">قلیان</a>
-                <a href="#breakfast" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">صبحانه</a>
+                <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">صفحه نخست</a>
+                <a href="#coffee" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">کافه</a>
+                <a href="#ice-coffee" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">آیس کافه</a>
+                <a href="#drinks" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">نوشیدنی</a>
+                <a href="#mocktails" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">ماکتیل</a>
+                <a href="#tea" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">چای و دمنوش</a>
+                <a href="#hookah" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">قلیان</a>
+                <a href="#breakfast" class="mobile-nav-link block px-3 py-2 rounded-md transition-colors font-medium">صبحانه</a>
             </div>
         </div>
     </nav>
@@ -306,86 +400,108 @@
         <!-- کافه -->
         <section id="coffee" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">کافه</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">مجموعه‌ای از بهترین قهوه‌های دنیا</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">کافه</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">مجموعه‌ای از بهترین قهوه‌های دنیا</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 py-3 transition-colors duration-300">اسپرسو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-title mb-2 transition-colors duration-300">اسپرسو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۴,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۴,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 py-3 transition-colors duration-300">آمریکانو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-title mb-2 transition-colors duration-300">آمریکانو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۶,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۶,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">قهوه ترک</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">قهوه ترک</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">لاته</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">لاته</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">قهوه رابری</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">قهوه رابری</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کاپوچینو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کاپوچینو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کارامل ماکیاتو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کارامل ماکیاتو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آفوگاتو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آفوگاتو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">هانی کرم</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">هانی کرم</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیریش کرم</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیریش کرم</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">هات چاکلت</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">هات چاکلت</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -396,44 +512,54 @@
         <!-- آیس کافه -->
         <section id="ice-coffee" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">آیس کافه</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">قهوه‌های سرد و خنک‌کننده</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">آیس کافه</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">قهوه‌های سرد و خنک‌کننده</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیس اسپرسو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیس اسپرسو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیس آمریکانو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیس آمریکانو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیس لاته</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیس لاته</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیس موکا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیس موکا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آیس کارامل ماکیاتو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آیس کارامل ماکیاتو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 
@@ -445,65 +571,81 @@
         <!-- نوشیدنی -->
         <section id="drinks" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">نوشیدنی</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">نوشیدنی‌های طبیعی و تازه</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">نوشیدنی</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">نوشیدنی‌های طبیعی و تازه</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">لیموناد</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">لیموناد</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۶,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۶,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">موهیتو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">موهیتو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">رد موهیتو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">رد موهیتو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">ایتالین سودا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">ایتالین سودا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آبمیوه طبیعی آلبالو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آبمیوه طبیعی آلبالو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آبمیوه طبیعی آلوچه</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آبمیوه طبیعی آلوچه</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نوشابه بطری</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نوشابه بطری</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۴,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۴,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نوشابه قوطی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نوشابه قوطی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۲۵,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -514,44 +656,54 @@
         <!-- ماکتیل -->
         <section id="mocktails" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">ماکتیل</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">ترکیبات خاص و منحصربه‌فرد</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">ماکتیل</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">ترکیبات خاص و منحصربه‌فرد</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">شب</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">شب</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">آسمان</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">آسمان</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">استوایی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">استوایی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">پینت لاکودا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">پینت لاکودا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۵,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۱۵,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">پرتقال سبز</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">پرتقال سبز</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۰۴,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۰۴,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -562,128 +714,162 @@
         <!-- چای و دمنوش -->
         <section id="tea" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">چای و دمنوش</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">گیاهان معطر و آرام‌بخش</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">چای و دمنوش</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">گیاهان معطر و آرام‌بخش</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای سبز</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای سبز</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای سیاه ساده</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای سیاه ساده</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۴۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای سیاه با هل</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای سیاه با هل</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای ماسالا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای ماسالا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کیک</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کیک</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۳۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای کرک</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای کرک</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای سیاه باغنچه محمدی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای سیاه باغنچه محمدی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای آلاله</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای آلاله</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                 </div>
 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای ترش</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای ترش</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای آویشن</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای آویشن</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">چای سیاه مخصوص</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">چای سیاه مخصوص</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">گل گاو زبان</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">گل گاو زبان</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۲,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دمنوش آلاله</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دمنوش آلاله</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دمنوش بابونه</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دمنوش بابونه</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دمنوش مهرگیاه</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دمنوش مهرگیاه</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دمنوش آبنوس</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دمنوش آبنوس</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دمنوش سبزنوش</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دمنوش سبزنوش</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -694,79 +880,99 @@
         <!-- قلیان -->
         <section id="hookah" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">قلیان</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">طعم‌های منحصربه‌فرد و معطر</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">قلیان</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">طعم‌های منحصربه‌فرد و معطر</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نعنا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نعنا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نعنا لیمو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نعنا لیمو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">یخ دارچین</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">یخ دارچین</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دوسیب</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دوسیب</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">دوسیب آلبالو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">دوسیب آلبالو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">لاو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">لاو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">شب های مسکو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">شب های مسکو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">شب های استانبول</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">شب های استانبول</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">پدرخوانده</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">پدرخوانده</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">شلیل آلبالو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">شلیل آلبالو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۸۰,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -777,44 +983,54 @@
         <!-- بستنی -->
         <section class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">بستنی</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">بستنی‌(اسکوپی)</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">بستنی</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">بستنی‌(اسکوپی)</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">وانیل</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">وانیل</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کارامل</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کارامل</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">شاتوت</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">شاتوت</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">انبه</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">انبه</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">زعفرانی پسته دار</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">زعفرانی پسته دار</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۱۸,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -825,128 +1041,162 @@
         <!-- صبحانه -->
         <section id="breakfast" class="mb-20 reveal">
             <div class="text-center mb-12">
-                <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300">صبحانه</h2>
-                <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light transition-colors duration-300">آغاز روزی پر انرژی</p>
+                <h2 class="section-title text-4xl lg:text-5xl font-bold text-title mb-3 transition-colors duration-300">صبحانه</h2>
+                <p class="text-subtitle text-base max-w-md mx-auto font-light transition-colors duration-300">آغاز روزی پر انرژی</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">املت با روغن خوراکی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">املت با روغن خوراکی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">املت با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">املت با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نیمرو با روغن خوراکی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نیمرو با روغن خوراکی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نیمرو با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نیمرو با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کره عسل</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کره عسل</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کره عسل با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کره عسل با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کره مربا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کره مربا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">کره مربا با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">کره مربا با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">سوسیس تخم مرغ</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">سوسیس تخم مرغ</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نون پنیر</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نون پنیر</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نون پنیر با گردو</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نون پنیر با گردو</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۶۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">تخم مرغ با پیازچه با روغن خوراکی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">تخم مرغ با پیازچه با روغن خوراکی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">تخم مرغ با پیازچه با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">تخم مرغ با پیازچه با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">تخم مرغ با پیاز با روغن خوراکی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">تخم مرغ با پیاز با روغن خوراکی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۷۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">تخم مرغ با پیاز با کره محلی</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">تخم مرغ با پیاز با کره محلی</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">نون و حلوا</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">نون و حلوا</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۵۰,۰۰۰ تومان</div>
                 </div>
                 
                 <div class="menu-card rounded-xl p-6">
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">قارچ و تخم مرغ</h3>
+                    <div class="menu-card-content">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-semibold text-title mb-2 transition-colors duration-300">قارچ و تخم مرغ</h3>
+                        </div>
+                        <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                     </div>
-                    <div class="price-tag px-3 py-2 rounded-lg text-center font-medium text-sm number-fa">۹۰,۰۰۰ تومان</div>
                 </div>
                 
             </div>
@@ -958,29 +1208,29 @@
     <footer class="glass-bg py-12 mt-16">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-6">
-                <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-3 transition-colors duration-300">کافه هانی</h3>
+                <h3 class="text-2xl font-semibold text-title mb-3 transition-colors duration-300">کافه هانی</h3>
                 <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-4"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
                 <div>
-                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">آدرس</h4>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed transition-colors duration-300">
+                    <h4 class="text-base font-semibold text-title mb-2 transition-colors duration-300">آدرس</h4>
+                    <p class="text-subtitle leading-relaxed transition-colors duration-300">
                         کرمان، خیابان آیت‌الله صالحی بین کوچه یک و هشت
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">تماس</h4>
-                    <div class="text-gray-600 dark:text-gray-400 space-y-1 number-fa transition-colors duration-300">
+                    <h4 class="text-base font-semibold text-title mb-2 transition-colors duration-300">تماس</h4>
+                    <div class="text-subtitle space-y-1 number-fa transition-colors duration-300">
                         <p>۰۳۷۳۲۵۱۵۵۹۳</p>
                         <p>۰۳۴۳۲۵۳۱۲۳۰</p>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">ساعات کاری (شنبه تا پنج شنبه)</h4>
-                    <p class="text-gray-600 dark:text-gray-400 number-fa transition-colors duration-300">
+                    <h4 class="text-base font-semibold text-title mb-2 transition-colors duration-300">ساعات کاری (شنبه تا پنج شنبه)</h4>
+                    <p class="text-subtitle number-fa transition-colors duration-300">
                         ۵:۳۰ تا ۱۰:۳۰ صبح | ۱۷ تا ۲۲ شب
                     </p>
                 </div>
