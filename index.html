@@ -22,6 +22,8 @@
                     animation: {
                         'fade-up': 'fadeUp 0.8s ease-out',
                         'slide-up': 'slideUp 0.6s ease-out',
+                        'scale-up': 'scaleUp 0.5s ease-out',
+                        'slide-in': 'slideIn 0.7s ease-out',
                     }
                 }
             }
@@ -55,6 +57,28 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
         
@@ -305,134 +329,22 @@
             background-color: rgba(31, 41, 55, 0.5);
         }
 
-        /* Improved Slider Styles */
-        .slider-indicator.active {
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            transform: scale(1.2);
-        }
-        
-        .slider-item {
+        /* Modern Slider Styles */
+        .slider-slide {
             will-change: transform, opacity;
         }
         
-        .slider-item.active {
-            opacity: 1;
-            transform: translateX(0);
+        .modern-indicator.active {
+            background-color: #8B4513 !important;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.5);
         }
         
-        .slider-item.prev {
-            opacity: 0;
-            transform: translateX(-100%);
+        .dark .modern-indicator.active {
+            background-color: #CD853F !important;
+            box-shadow: 0 0 15px rgba(205, 133, 63, 0.5);
         }
         
-        .slider-item.next {
-            opacity: 0;
-            transform: translateX(100%);
-        }
-        
-        /* Enhanced slider background image handling */
-        .slider-bg {
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Mobile optimization for slider backgrounds */
-        @media (max-width: 768px) {
-            .slider-bg {
-                background-size: cover;
-                background-position: center center;
-                background-attachment: scroll;
-            }
-        }
-        
-        /* Enhanced slider overlay for better readability in both modes */
-/* اسلایدر – پس‌زمینه در حالت روشن و تیره */
-.slider-overlay {
-    transition: all 0.3s ease;
-}
-
-body:not(.dark) .slider-overlay {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%);
-}
-
-.dark .slider-overlay {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0.2) 100%);
-}
-
-/* متن اسلایدر */
-.slider-text {
-    color: #1f2937;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
-    font-weight: 700;
-}
-
-.dark .slider-text {
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* دکمه اسلایدر */
-.slider-button {
-    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
-}
-
-.slider-button:hover {
-    background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-    transform: scale(1.05);
-}
-
-
-        /* Navigation arrows positioning to avoid text overlap */
-        .slider-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 50;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 12px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .slider-nav-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .slider-nav-btn.prev {
-            left: 20px;
-        }
-        
-        .slider-nav-btn.next {
-            right: 20px;
-        }
-        
-        /* Responsive positioning for mobile */
-        @media (max-width: 768px) {
-            .slider-nav-btn.prev {
-                left: 10px;
-            }
-            
-            .slider-nav-btn.next {
-                right: 10px;
-            }
-            
-            .slider-content {
-                padding-left: 60px !important;
-                padding-right: 60px !important;
-            }
-        }
-
         /* Additional text colors */
         .text-title {
             color: #1f2937;
@@ -448,6 +360,11 @@ body:not(.dark) .slider-overlay {
         
         .dark .text-subtitle {
             color: #9ca3af;
+        }
+
+        /* Smooth animations for slider */
+        .slider-slide {
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
     </style>
@@ -538,139 +455,207 @@ body:not(.dark) .slider-overlay {
         </div>
     </header>
 
-    <!-- Coffee Slider -->
-    <section class="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
-        <div class="container mx-auto px-6 py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl lg:text-5xl font-bold text-title mb-4 transition-colors duration-300">دسته‌بندی‌های منو</h2>
-                <p class="text-subtitle text-lg max-w-2xl mx-auto font-light transition-colors duration-300">کشف کنید طعم‌های بی‌نظیر کافه هانی</p>
+    <!-- Modern Category Slider -->
+    <section class="relative py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+        <div class="container mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <div class="inline-block">
+                    <h2 class="text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        دسته‌بندی‌های منو
+                    </h2>
+                    <div class="h-1 w-32 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+                </div>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 font-light">
+                    کشف کنید طعم‌های بی‌نظیر کافه هانی
+                </p>
             </div>
             
-            <div class="relative">
-                <!-- Slider Container -->
-                <div id="coffee-slider" class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <!-- Slider Container -->
+            <div class="relative max-w-6xl mx-auto">
+                <div id="modern-slider" class="relative h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                     
                     <!-- Slide 1: کافه -->
-                    <div class="slider-item absolute inset-0 transition-all duration-700 ease-in-out" data-slide="0">
-                        <div class="slider-bg absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
-                        <div class="slider-overlay absolute inset-0"></div>
-                        <div class="relative z-10 h-full flex items-center">
-                            <div class="container mx-auto slider-content px-8 md:px-16">
-                                <div class="max-w-2xl">
-                                    <h3 class="slider-text text-4xl md:text-6xl font-black mb-4">کافه</h3>
-                                    <p class="slider-text text-lg md:text-xl mb-6 leading-relaxed opacity-90">مجموعه‌ای از بهترین قهوه‌های دنیا برای شروع روزی پرانرژی</p>
-                                    <a href="#coffee" class="slider-button inline-flex items-center text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-                                        مشاهده منو
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="slider-slide absolute inset-0 opacity-100 transform translate-x-0 transition-all duration-700 ease-out" data-slide="0">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-900/20 to-amber-700/10 dark:from-amber-900/40 dark:to-amber-700/20"></div>
+                        <div class="relative h-full flex items-center">
+                            <div class="w-full lg:w-1/2 p-8 lg:p-16 z-10">
+                                <div class="space-y-6">
+                                    <div class="inline-flex items-center bg-primary/10 dark:bg-primary/20 px-4 py-2 rounded-full">
+                                        <svg class="w-5 h-5 text-primary ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M4 3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4zm0 2h12v10H4V5zm2 2a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1zm0 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1z"/>
+                                        </svg>
+                                        <span class="text-primary font-medium text-sm">دسته اول</span>
+                                    </div>
+                                    <h3 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white">
+                                        کافه
+                                    </h3>
+                                    <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        مجموعه‌ای از بهترین قهوه‌های دنیا برای شروع روزی پرانرژی و لذت‌بخش
+                                    </p>
+                                    <a href="#coffee" class="inline-flex items-center bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                                        مشاهده منو کافه
+                                        <svg class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                     </a>
                                 </div>
+                            </div>
+                            <div class="hidden lg:block w-1/2 h-full">
+                                <div class="h-full bg-cover bg-center bg-no-repeat rounded-r-3xl" style="background-image: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.1)), url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Slide 2: آیس کافه -->
-                    <div class="slider-item absolute inset-0 transition-all duration-700 ease-in-out opacity-0 translate-x-full" data-slide="1">
-                        <div class="slider-bg absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
-                        <div class="slider-overlay absolute inset-0"></div>
-                        <div class="relative z-10 h-full flex items-center">
-                            <div class="container mx-auto slider-content px-8 md:px-16">
-                                <div class="max-w-2xl">
-                                    <h3 class="slider-text text-4xl md:text-6xl font-black mb-4">آیس کافه</h3>
-                                    <p class="slider-text text-lg md:text-xl mb-6 leading-relaxed opacity-90">قهوه‌های سرد و خنک‌کننده برای روزهای گرم تابستان</p>
-                                    <a href="#ice-coffee" class="slider-button inline-flex items-center text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-                                        مشاهده منو
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="slider-slide absolute inset-0 opacity-0 transform translate-x-full transition-all duration-700 ease-out" data-slide="1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-cyan-700/10 dark:from-blue-900/40 dark:to-cyan-700/20"></div>
+                        <div class="relative h-full flex items-center">
+                            <div class="w-full lg:w-1/2 p-8 lg:p-16 z-10">
+                                <div class="space-y-6">
+                                    <div class="inline-flex items-center bg-blue-500/10 dark:bg-blue-500/20 px-4 py-2 rounded-full">
+                                        <svg class="w-5 h-5 text-blue-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5z"/>
+                                        </svg>
+                                        <span class="text-blue-500 font-medium text-sm">دسته دوم</span>
+                                    </div>
+                                    <h3 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white">
+                                        آیس کافه
+                                    </h3>
+                                    <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        قهوه‌های سرد و خنک‌کننده برای روزهای گرم تابستان و لحظات آرام
+                                    </p>
+                                    <a href="#ice-coffee" class="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                                        مشاهده منو آیس کافه
+                                        <svg class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                     </a>
                                 </div>
+                            </div>
+                            <div class="hidden lg:block w-1/2 h-full">
+                                <div class="h-full bg-cover bg-center bg-no-repeat rounded-r-3xl" style="background-image: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)), url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Slide 3: نوشیدنی -->
-                    <div class="slider-item absolute inset-0 transition-all duration-700 ease-in-out opacity-0 translate-x-full" data-slide="2">
-                        <div class="slider-bg absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
-                        <div class="slider-overlay absolute inset-0"></div>
-                        <div class="relative z-10 h-full flex items-center">
-                            <div class="container mx-auto slider-content px-8 md:px-16">
-                                <div class="max-w-2xl">
-                                    <h3 class="slider-text text-4xl md:text-6xl font-black mb-4">نوشیدنی</h3>
-                                    <p class="slider-text text-lg md:text-xl mb-6 leading-relaxed opacity-90">نوشیدنی‌های طبیعی و تازه با طعم‌های متنوع و دلپذیر</p>
-                                    <a href="#drinks" class="slider-button inline-flex items-center text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-                                        مشاهده منو
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="slider-slide absolute inset-0 opacity-0 transform translate-x-full transition-all duration-700 ease-out" data-slide="2">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-900/20 to-emerald-700/10 dark:from-green-900/40 dark:to-emerald-700/20"></div>
+                        <div class="relative h-full flex items-center">
+                            <div class="w-full lg:w-1/2 p-8 lg:p-16 z-10">
+                                <div class="space-y-6">
+                                    <div class="inline-flex items-center bg-green-500/10 dark:bg-green-500/20 px-4 py-2 rounded-full">
+                                        <svg class="w-5 h-5 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        <span class="text-green-500 font-medium text-sm">دسته سوم</span>
+                                    </div>
+                                    <h3 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white">
+                                        نوشیدنی
+                                    </h3>
+                                    <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        نوشیدنی‌های طبیعی و تازه با طعم‌های متنوع و دلپذیر از بهترین مواد
+                                    </p>
+                                    <a href="#drinks" class="inline-flex items-center bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                                        مشاهده منو نوشیدنی
+                                        <svg class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                     </a>
                                 </div>
+                            </div>
+                            <div class="hidden lg:block w-1/2 h-full">
+                                <div class="h-full bg-cover bg-center bg-no-repeat rounded-r-3xl" style="background-image: linear-gradient(45deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)), url('https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Slide 4: ماکتیل -->
-                    <div class="slider-item absolute inset-0 transition-all duration-700 ease-in-out opacity-0 translate-x-full" data-slide="3">
-                        <div class="slider-bg absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
-                        <div class="slider-overlay absolute inset-0"></div>
-                        <div class="relative z-10 h-full flex items-center">
-                            <div class="container mx-auto slider-content px-8 md:px-16">
-                                <div class="max-w-2xl">
-                                    <h3 class="slider-text text-4xl md:text-6xl font-black mb-4">ماکتیل</h3>
-                                    <p class="slider-text text-lg md:text-xl mb-6 leading-relaxed opacity-90">ترکیبات خاص و منحصربه‌فرد با رنگ‌ها و طعم‌های جذاب</p>
-                                    <a href="#mocktails" class="slider-button inline-flex items-center text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-                                        مشاهده منو
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="slider-slide absolute inset-0 opacity-0 transform translate-x-full transition-all duration-700 ease-out" data-slide="3">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-pink-700/10 dark:from-purple-900/40 dark:to-pink-700/20"></div>
+                        <div class="relative h-full flex items-center">
+                            <div class="w-full lg:w-1/2 p-8 lg:p-16 z-10">
+                                <div class="space-y-6">
+                                    <div class="inline-flex items-center bg-purple-500/10 dark:bg-purple-500/20 px-4 py-2 rounded-full">
+                                        <svg class="w-5 h-5 text-purple-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                        </svg>
+                                        <span class="text-purple-500 font-medium text-sm">دسته چهارم</span>
+                                    </div>
+                                    <h3 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white">
+                                        ماکتیل
+                                    </h3>
+                                    <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        ترکیبات خاص و منحصربه‌فرد با رنگ‌ها و طعم‌های جذاب و چشم‌نواز
+                                    </p>
+                                    <a href="#mocktails" class="inline-flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                                        مشاهده منو ماکتیل
+                                        <svg class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                     </a>
                                 </div>
                             </div>
+                            <div class="hidden lg:block w-1/2 h-full">
+                                <div class="h-full bg-cover bg-center bg-no-repeat rounded-r-3xl" style="background-image: linear-gradient(45deg, rgba(147, 51, 234, 0.1), rgba(236, 72, 153, 0.1)), url('https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Slide 5: صبحانه -->
-                    <div class="slider-item absolute inset-0 transition-all duration-700 ease-in-out opacity-0 translate-x-full" data-slide="4">
-                        <div class="slider-bg absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
-                        <div class="slider-overlay absolute inset-0"></div>
-                        <div class="relative z-10 h-full flex items-center">
-                            <div class="container mx-auto slider-content px-8 md:px-16">
-                                <div class="max-w-2xl">
-                                    <h3 class="slider-text text-4xl md:text-6xl font-black mb-4">صبحانه</h3>
-                                    <p class="slider-text text-lg md:text-xl mb-6 leading-relaxed opacity-90">آغاز روزی پر انرژی با غذاهای تازه و خوشمزه</p>
-                                    <a href="#breakfast" class="slider-button inline-flex items-center text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-                                        مشاهده منو
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="slider-slide absolute inset-0 opacity-0 transform translate-x-full transition-all duration-700 ease-out" data-slide="4">
+                        <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-red-700/10 dark:from-orange-900/40 dark:to-red-700/20"></div>
+                        <div class="relative h-full flex items-center">
+                            <div class="w-full lg:w-1/2 p-8 lg:p-16 z-10">
+                                <div class="space-y-6">
+                                    <div class="inline-flex items-center bg-orange-500/10 dark:bg-orange-500/20 px-4 py-2 rounded-full">
+                                        <svg class="w-5 h-5 text-orange-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                        </svg>
+                                        <span class="text-orange-500 font-medium text-sm">دسته پنجم</span>
+                                    </div>
+                                    <h3 class="text-5xl lg:text-6xl font-black text-gray-900 dark:text-white">
+                                        صبحانه
+                                    </h3>
+                                    <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                                        آغاز روزی پر انرژی با غذاهای تازه و خوشمزه در فضایی دلنشین
+                                    </p>
+                                    <a href="#breakfast" class="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                                        مشاهده منو صبحانه
+                                        <svg class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                         </svg>
                                     </a>
                                 </div>
+                            </div>
+                            <div class="hidden lg:block w-1/2 h-full">
+                                <div class="h-full bg-cover bg-center bg-no-repeat rounded-r-3xl" style="background-image: linear-gradient(45deg, rgba(249, 115, 22, 0.1), rgba(239, 68, 68, 0.1)), url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Navigation Arrows -->
-                <button id="prev-slide" class="slider-nav-btn prev">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="prev-slide" class="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group border border-gray-200 dark:border-gray-600">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
                 
-                <button id="next-slide" class="slider-nav-btn next">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="next-slide" class="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group border border-gray-200 dark:border-gray-600">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </button>
                 
-                <!-- Indicators -->
-                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex space-x-2">
-                    <button class="slider-indicator w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300 active" data-slide="0"></button>
-                    <button class="slider-indicator w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300" data-slide="1"></button>
-                    <button class="slider-indicator w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300" data-slide="2"></button>
-                    <button class="slider-indicator w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300" data-slide="3"></button>
-                    <button class="slider-indicator w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300" data-slide="4"></button>
+                <!-- Modern Indicators -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex space-x-3">
+                    <button class="modern-indicator w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-primary dark:hover:bg-accent transition-all duration-300 active" data-slide="0"></button>
+                    <button class="modern-indicator w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-primary dark:hover:bg-accent transition-all duration-300" data-slide="1"></button>
+                    <button class="modern-indicator w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-primary dark:hover:bg-accent transition-all duration-300" data-slide="2"></button>
+                    <button class="modern-indicator w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-primary dark:hover:bg-accent transition-all duration-300" data-slide="3"></button>
+                    <button class="modern-indicator w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-primary dark:hover:bg-accent transition-all duration-300" data-slide="4"></button>
                 </div>
             </div>
         </div>
@@ -1671,25 +1656,23 @@ body:not(.dark) .slider-overlay {
             el.innerHTML = convertToPersianNumbers(el.innerHTML);
         });
 
-        // Slider functionality
+        // Modern Slider functionality
         let currentSlide = 0;
         const totalSlides = 5;
         let slideInterval;
 
         function showSlide(index) {
-            const slides = document.querySelectorAll('.slider-item');
-            const indicators = document.querySelectorAll('.slider-indicator');
+            const slides = document.querySelectorAll('.slider-slide');
+            const indicators = document.querySelectorAll('.modern-indicator');
             
-            // Remove all classes
-            slides.forEach(slide => {
-                slide.classList.remove('active', 'prev', 'next');
+            // Hide all slides
+            slides.forEach((slide, i) => {
                 slide.style.opacity = '0';
-                slide.style.transform = 'translateX(100%)';
+                slide.style.transform = i < index ? 'translateX(-100%)' : 'translateX(100%)';
             });
             
             // Show current slide
             if (slides[index]) {
-                slides[index].classList.add('active');
                 slides[index].style.opacity = '1';
                 slides[index].style.transform = 'translateX(0)';
             }
@@ -1720,12 +1703,12 @@ body:not(.dark) .slider-overlay {
             clearInterval(slideInterval);
         }
 
-        // Initialize slider
+        // Initialize modern slider
         document.addEventListener('DOMContentLoaded', function() {
             const nextBtn = document.getElementById('next-slide');
             const prevBtn = document.getElementById('prev-slide');
-            const indicators = document.querySelectorAll('.slider-indicator');
-            const slider = document.getElementById('coffee-slider');
+            const indicators = document.querySelectorAll('.modern-indicator');
+            const slider = document.getElementById('modern-slider');
             
             // Set initial slide
             showSlide(0);
