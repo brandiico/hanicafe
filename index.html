@@ -32,6 +32,10 @@
             font-family: 'Vazirmatn', sans-serif;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -149,12 +153,83 @@
             backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        /* Navigation Styles */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-vazir">
 
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold text-primary dark:text-accent">کافه هانی</h1>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="flex space-x-reverse space-x-8">
+                        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">صفحه نخست</a>
+                        <a href="#coffee" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">کافه</a>
+                        <a href="#ice-coffee" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">آیس کافه</a>
+                        <a href="#drinks" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">نوشیدنی</a>
+                        <a href="#mocktails" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">ماکتیل</a>
+                        <a href="#tea" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">چای و دمنوش</a>
+                        <a href="#hookah" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">قلیان</a>
+                        <a href="#breakfast" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors font-medium">صبحانه</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white/98 dark:bg-gray-900/98 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">صفحه نخست</a>
+                <a href="#coffee" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">کافه</a>
+                <a href="#ice-coffee" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">آیس کافه</a>
+                <a href="#drinks" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">نوشیدنی</a>
+                <a href="#mocktails" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">ماکتیل</a>
+                <a href="#tea" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">چای و دمنوش</a>
+                <a href="#hookah" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">قلیان</a>
+                <a href="#breakfast" class="mobile-nav-link block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors font-medium">صبحانه</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header -->
-    <header class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
+    <header id="home" class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden pt-16">
         <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2061&q=80');"></div>
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="container mx-auto px-6 text-center relative z-10">
@@ -171,7 +246,7 @@
     <div class="container mx-auto px-6 py-16">
         
         <!-- کافه -->
-        <section class="mb-20 reveal">
+        <section id="coffee" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">کافه</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">مجموعه‌ای از بهترین قهوه‌های دنیا</p>
@@ -261,7 +336,7 @@
         <div class="divider-line"></div>
 
         <!-- آیس کافه -->
-        <section class="mb-20 reveal">
+        <section id="ice-coffee" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">آیس کافه</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">قهوه‌های سرد و خنک‌کننده</p>
@@ -310,7 +385,7 @@
         <div class="divider-line"></div>
 
         <!-- نوشیدنی -->
-        <section class="mb-20 reveal">
+        <section id="drinks" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">نوشیدنی</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">نوشیدنی‌های طبیعی و تازه</p>
@@ -379,7 +454,7 @@
         <div class="divider-line"></div>
 
         <!-- ماکتیل -->
-        <section class="mb-20 reveal">
+        <section id="mocktails" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">ماکتیل</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">ترکیبات خاص و منحصربه‌فرد</p>
@@ -427,7 +502,7 @@
         <div class="divider-line"></div>
 
         <!-- چای و دمنوش -->
-        <section class="mb-20 reveal">
+        <section id="tea" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">چای و دمنوش</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">گیاهان معطر و آرام‌بخش</p>
@@ -559,7 +634,7 @@
         <div class="divider-line"></div>
 
         <!-- قلیان -->
-        <section class="mb-20 reveal">
+        <section id="hookah" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">قلیان</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">طعم‌های منحصربه‌فرد و معطر</p>
@@ -690,7 +765,7 @@
         <div class="divider-line"></div>
 
         <!-- صبحانه -->
-        <section class="mb-20 reveal">
+        <section id="breakfast" class="mb-20 reveal">
             <div class="text-center mb-12">
                 <h2 class="section-title text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-3">صبحانه</h2>
                 <p class="text-gray-600 dark:text-gray-400 text-base max-w-md mx-auto font-light">آغاز روزی پر انرژی</p>
@@ -874,6 +949,47 @@
                 document.documentElement.classList.remove('dark');
             }
         });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Active navigation link highlighting
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        const sections = document.querySelectorAll('section[id], header[id]');
+
+        function updateActiveNavLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+        updateActiveNavLink(); // Call once on load
 
         // Reveal animation on scroll
         const observerOptions = {
