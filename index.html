@@ -973,24 +973,12 @@
     </footer>
 
     <script>
-        // Theme management
+        // Theme management (simplified for iframe environment)
         function initTheme() {
-            // Check if user has previously set a preference
-            const savedTheme = localStorage.getItem('theme');
-            
-            if (savedTheme) {
-                if (savedTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            } else {
-                // Fall back to system preference
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.classList.add('dark');
-                }
+            // Start with system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
             }
-            
             updateThemeIcons();
         }
 
@@ -999,10 +987,8 @@
             
             if (isDark) {
                 document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
             } else {
                 document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
             }
             
             updateThemeIcons();
@@ -1037,20 +1023,27 @@
 
         // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            // Only apply system preference if user hasn't manually set a preference
-            if (!localStorage.getItem('theme')) {
-                if (event.matches) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-                updateThemeIcons();
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
             }
+            updateThemeIcons();
         });
 
         // Theme toggle event listeners
-        document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-        document.getElementById('mobile-theme-toggle')?.addEventListener('click', toggleTheme);
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', toggleTheme);
+            }
+        });
 
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
